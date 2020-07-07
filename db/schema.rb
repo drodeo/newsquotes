@@ -10,10 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_06_200159) do
+ActiveRecord::Schema.define(version: 2020_07_07_184342) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "quotes", force: :cascade do |t|
+    t.integer "ticker_id"
+    t.datetime "dt"
+    t.float "open"
+    t.float "hi"
+    t.float "low"
+    t.float "close"
+    t.integer "volume"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ticker_id"], name: "index_quotes_on_ticker_id"
+  end
+
+  create_table "tickers", force: :cascade do |t|
+    t.string "ticker"
+    t.string "name"
+    t.string "exchange"
+    t.string "decription"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ticker"], name: "index_tickers_on_ticker"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
